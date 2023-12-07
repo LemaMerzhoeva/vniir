@@ -45,17 +45,14 @@ def process_file_boxplot(file):
         file_path = os.path.join(folder_path, file)
         df = pd.read_excel(file_path, sheet_name=None)
 
-        # Create a subfolder for each file
         output_folder = os.path.join(folder_path, f"{file}_boxplots")
         os.makedirs(output_folder, exist_ok=True)
 
         for sheet_name, sheet_data in df.items():
             if not sheet_data.empty:
-                # Filter numeric columns
                 numeric_columns = [col for col in sheet_data.columns if pd.api.types.is_numeric_dtype(sheet_data[col])]
 
                 if numeric_columns:
-                    # Iterate over numeric columns and create a separate boxplot for each
                     for col in numeric_columns:
                         plt.figure()
 
